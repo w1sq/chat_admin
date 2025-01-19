@@ -1,0 +1,9 @@
+services:
+  chat_admin:
+    build: .
+    container_name: chat_admin
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: unless-stopped
