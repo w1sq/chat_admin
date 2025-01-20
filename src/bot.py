@@ -37,7 +37,11 @@ async def filter_message(message: types.Message):
     """Filter messages for links and user tags."""
     url_pattern = r"https?://\S+|www\.\S+|t\.me/\S+"
     username_pattern = r"@\w+"
-    if message.text:
+    if (
+        message.text
+        and message.sender_chat is not None
+        and message.sender_chat.type != "channel"
+    ):
         if re.search(url_pattern, message.text) or re.search(
             username_pattern, message.text
         ):
